@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beleza & Estilo | Salão de Beleza</title>
+  <style>
+    :root {
+      --cor-principal: #e4b1c1;
+      --cor-secundaria: #fff;
+      --cor-texto: #333;
+      --cor-destaque: #b46a84;
+      --fonte-principal: 'Poppins', sans-serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: var(--fonte-principal);
+    }
+
+    body {
+      background-color: var(--cor-secundaria);
+      color: var(--cor-texto);
+      line-height: 1.6;
+    }
+
+    header {
+      background-color: var(--cor-principal);
+      padding: 1.5rem;
+      text-align: center;
+      color: #fff;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      background-color: #fff;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    nav a {
+      color: var(--cor-texto);
+      text-decoration: none;
+      padding: 1rem;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: var(--cor-destaque);
+    }
+
+    section {
+      padding: 3rem 1.5rem;
+      text-align: center;
+    }
+
+    .hero {
+      background: url('https://images.unsplash.com/photo-1600334129128-1a1b9c6f6d44?auto=format&fit=crop&w=1200&q=60') center/cover no-repeat;
+      color: #fff;
+      padding: 6rem 1.5rem;
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      text-shadow: 1px 1px 3px #000;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      text-shadow: 1px 1px 2px #000;
+    }
+
+    .btn {
+      background-color: var(--cor-destaque);
+      color: #fff;
+      padding: 0.8rem 1.5rem;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #944d64;
+    }
+
+    .servicos {
+      display: grid;
+      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+
+    .servico {
+      background-color: #fff;
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .servico h3 {
+      color: var(--cor-destaque);
+      margin-bottom: 0.5rem;
+    }
+
+    .galeria {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+    }
+
+    .galeria img {
+      width: 100%;
+      border-radius: 10px;
+      transition: transform 0.3s;
+    }
+
+    .galeria img:hover {
+      transform: scale(1.05);
+    }
+
+    .contato {
+      background-color: #f8f8f8;
+      padding: 2rem;
+      border-radius: 10px;
+      display: inline-block;
+      text-align: left;
+    }
+
+    footer {
+      background-color: var(--cor-principal);
+      color: #fff;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 2rem;
+    }
+
+    /* Botão WhatsApp fixo */
+    .whatsapp-float {
+      position: fixed;
+      width: 60px;
+      height: 60px;
+      bottom: 20px;
+      right: 20px;
+      background-color: #25D366;
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+      text-decoration: none;
+      transition: transform 0.3s;
+    }
+
+    .whatsapp-float:hover {
+      transform: scale(1.1);
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 2rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Beleza & Estilo</h1>
+    <p>Transformando sua beleza todos os dias ✨</p>
+  </header>
+
+  <nav>
+    <a href="#inicio">Início</a>
+    <a href="#servicos">Serviços</a>
+    <a href="#galeria">Galeria</a>
+    <a href="#contato">Contato</a>
+    <a href="#localizacao">Localização</a>
+  </nav>
+
+  <section id="inicio" class="hero">
+    <h1>Realce sua beleza com um toque profissional</h1>
+    <p>Agende seu horário e viva uma nova experiência de cuidado e estilo.</p>
+    <a href="#contato" class="btn">Agendar agora</a>
+  </section>
+
+  <section id="servicos">
+    <h2>Nossos Serviços & Preços</h2>
+    <div class="servicos">
+      <div class="servico">
+        <h3>Corte Feminino</h3>
+        <p>A partir de R$ 60</p>
+      </div>
+      <div class="servico">
+        <h3>Coloração</h3>
+        <p>A partir de R$ 120</p>
+      </div>
+      <div class="servico">
+        <h3>Manicure e Pedicure</h3>
+        <p>A partir de R$ 40</p>
+      </div>
+      <div class="servico">
+        <h3>Maquiagem Profissional</h3>
+        <p>A partir de R$ 90</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="galeria">
+    <h2>Galeria de Trabalhos</h2>
+    <div class="galeria">
+      <img src="https://images.unsplash.com/photo-1599351430140-bb92df6a1d78?auto=format&fit=crop&w=600&q=60" alt="Cabelo">
+      <img src="https://images.unsplash.com/photo-1606220945770-6c70a5da75f3?auto=format&fit=crop&w=600&q=60" alt="Maquiagem">
+      <img src="https://images.unsplash.com/photo-1600334129128-1a1b9c6f6d44?auto=format&fit=crop&w=600&q=60" alt="Penteado">
+      <img src="https://images.unsplash.com/photo-1596464716127-f2a82984de30?auto=format&fit=crop&w=600&q=60" alt="Unhas">
+    </div>
+  </section>
+
+  <section id="contato">
+    <h2>Contato</h2>
+    <div class="contato">
+      <p><strong>Telefone:</strong> (11) 99999-9999</p>
+      <p><strong>E-mail:</strong> contato@belezaestilo.com</p>
+      <p><strong>Horário:</strong> Seg a Sáb - 9h às 19h</p>
+      <p><strong>Depoimentos:</strong> ⭐⭐⭐⭐⭐ “Atendimento impecável! Saí me sentindo maravilhosa.”</p>
+    </div>
+  </section>
+
+  <section id="localizacao">
+    <h2>Onde Estamos</h2>
+    <p>Rua das Flores, 123 - Centro, São Paulo - SP</p>
+    <iframe 
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3656.727819320788!2d-46.65257342553587!3d-23.580043978780727!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce59c8dfcb7ec3%3A0xb08aa7b703cdb3c1!2sAv.%20Paulista%2C%201000!5e0!3m2!1spt-BR!2sbr!4v1685390782739!5m2!1spt-BR!2sbr" 
+      width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Beleza & Estilo - Todos os direitos reservados</p>
+  </footer>
+
+  <a href="https://wa.me/5599999999999" class="whatsapp-float" target="_blank">💬</a>
+</body>
+</html>
