@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Beleza & Estilo | Salão de Beleza</title>
+  <title>Tigas Barber | Salão de Beleza</title>
   <style>
     :root {
       --cor-principal: #e4b1c1;
@@ -133,6 +133,35 @@
       text-align: left;
     }
 
+    /* Seção Instagram */
+    #instagram {
+      background-color: #fff;
+      padding: 3rem 1.5rem;
+      text-align: center;
+    }
+
+    #instagram h2 {
+      color: var(--cor-destaque);
+      margin-bottom: 0.5rem;
+    }
+
+    #instagram p {
+      margin-bottom: 1rem;
+      font-size: 1rem;
+    }
+
+    .qrcode {
+      width: 180px;
+      height: 180px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      transition: transform 0.3s;
+    }
+
+    .qrcode:hover {
+      transform: scale(1.05);
+    }
+
     footer {
       background-color: var(--cor-principal);
       color: #fff;
@@ -172,7 +201,7 @@
 <body>
   <header>
     <h1>Tigas Barber</h1>
-    <p>Transformando sua beleza todos os dias ✨</p>
+    <p>Transformando seu estilo todos os dias ✂️✨</p>
   </header>
 
   <nav>
@@ -181,10 +210,11 @@
     <a href="#galeria">Galeria</a>
     <a href="#contato">Contato</a>
     <a href="#localizacao">Localização</a>
+    <a href="#instagram">Instagram</a>
   </nav>
 
   <section id="inicio" class="hero">
-    <h1>Realce sua beleza com um toque profissional</h1>
+    <h1>Realce seu visual com um toque profissional</h1>
     <p>Agende seu horário e viva uma nova experiência de cuidado e estilo.</p>
     <a href="#contato" class="btn">Agendar agora</a>
   </section>
@@ -201,12 +231,12 @@
         <p>A partir de R$ 120</p>
       </div>
       <div class="servico">
-        <h3>Manicure e Pedicure</h3>
-        <p>A partir de R$ 40</p>
+        <h3>Barba Completa</h3>
+        <p>A partir de R$ 25</p>
       </div>
       <div class="servico">
-        <h3>Maquiagem Profissional</h3>
-        <p>A partir de R$ 90</p>
+        <h3>Design de Sobrancelhas</h3>
+        <p>A partir de R$ 15</p>
       </div>
     </div>
   </section>
@@ -215,9 +245,9 @@
     <h2>Galeria de Trabalhos</h2>
     <div class="galeria">
       <img src="https://images.unsplash.com/photo-1599351430140-bb92df6a1d78?auto=format&fit=crop&w=600&q=60" alt="Cabelo">
-      <img src="https://images.unsplash.com/photo-1606220945770-6c70a5da75f3?auto=format&fit=crop&w=600&q=60" alt="Maquiagem">
+      <img src="https://images.unsplash.com/photo-1606220945770-6c70a5da75f3?auto=format&fit=crop&w=600&q=60" alt="Barba">
       <img src="https://images.unsplash.com/photo-1600334129128-1a1b9c6f6d44?auto=format&fit=crop&w=600&q=60" alt="Penteado">
-      <img src="https://images.unsplash.com/photo-1596464716127-f2a82984de30?auto=format&fit=crop&w=600&q=60" alt="Unhas">
+      <img src="https://images.unsplash.com/photo-1596464716127-f2a82984de30?auto=format&fit=crop&w=600&q=60" alt="Corte">
     </div>
   </section>
 
@@ -227,7 +257,7 @@
       <p><strong>Telefone:</strong> (19) 98136-9475</p>
       <p><strong>E-mail:</strong> tiagovxnox@gmail.com</p>
       <p><strong>Horário:</strong> Seg a Sáb - 17h às 22h</p>
-      <p><strong>Depoimentos:</strong> ⭐⭐⭐⭐⭐ “Atendimento impecável! Saí me sentindo maravilhosa.”</p>
+      <p><strong>Depoimentos:</strong> ⭐⭐⭐⭐⭐ “Atendimento impecável! Saí me sentindo renovado.”</p>
     </div>
   </section>
 
@@ -237,6 +267,16 @@
     <iframe 
       src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3656.727819320788!2d-46.65257342553587!3d-23.580043978780727!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce59c8dfcb7ec3%3A0xb08aa7b703cdb3c1!2sAv.%20Paulista%2C%201000!5e0!3m2!1spt-BR!2sbr!4v1685390782739!5m2!1spt-BR!2sbr" 
       width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+  </section>
+
+  <!-- 🌟 SEÇÃO INSTAGRAM COM QR CODE -->
+  <section id="instagram">
+    <h2>Siga-nos no Instagram 📸</h2>
+    <p>Escaneie o QR Code abaixo ou clique para visitar o perfil:</p>
+    <a href="https://www.instagram.com/tigasbarber" target="_blank">
+      <!-- 🔗 Substitua o link abaixo pelo endereço da imagem do seu QR code -->
+      <img src="https://seu-link-direto-da-imagem-do-qrcode.png" alt="QR Code do Instagram Tigas Barber" class="qrcode">
+    </a>
   </section>
 
   <footer>
