@@ -162,6 +162,20 @@
       transform: scale(1.05);
     }
 
+    /* Widget Instagram */
+    .instagram-feed {
+      margin-top: 2rem;
+      display: flex;
+      justify-content: center;
+    }
+
+    iframe.instagram-embed {
+      width: 100%;
+      max-width: 500px;
+      border: none;
+      overflow: hidden;
+    }
+
     footer {
       background-color: var(--cor-principal);
       color: #fff;
@@ -232,7 +246,7 @@
       </div>
       <div class="servico">
         <h3>Barba Completa</h3>
-        <p>A partir de R$ 25</p>
+        <p>A partir de R$ 20</p>
       </div>
       <div class="servico">
         <h3>Design de Sobrancelhas</h3>
@@ -264,19 +278,25 @@
   <section id="localizacao">
     <h2>Onde Estamos</h2>
     <p>Rua Lauro Corona, 60 - Alvorada, Piracicaba - SP</p>
-<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3679.183939729807!2d-47.61133178814232!3d-22.758554079273583!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94c63003d28cb657%3A0x8209b0b87f26a046!2sR.%20Lauro%20Corona%2C%2060%20-%20Jardim%20Alvorada%2C%20Piracicaba%20-%20SP%2C%2013425-723!5e0!3m2!1spt-BR!2sbr!4v1760618157267!5m2!1spt-BR!2sbr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3679.183939729807!2d-47.61133178814232!3d-22.758554079273583!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94c63003d28cb657%3A0x8209b0b87f26a046!2sR.%20Lauro%20Corona%2C%2060%20-%20Jardim%20Alvorada%2C%20Piracicaba%20-%20SP%2C%2013425-723!5e0!3m2!1spt-BR!2sbr!4v1760618157267!5m2!1spt-BR!2sbr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
   </section>
 
-  
-  <!-- 🌟 SEÇÃO INSTAGRAM COM QR CODE -->
+  <!-- 🌟 SEÇÃO INSTAGRAM COM QR CODE E FEED -->
   <section id="instagram">
     <h2>Siga-nos no Instagram 📸</h2>
     <p>Escaneie o QR Code abaixo ou clique para visitar o perfil:</p>
     <a href="https://www.instagram.com/tigasbarber__" target="_blank">
-      <!-- 🔗 Substitua o link abaixo pelo endereço da imagem do seu QR code -->
       <img src="IMG_5064.jpeg" alt="QR Code do Instagram Tigas Barber" class="qrcode">
     </a>
+
+    <!-- 🖼️ Feed Automático -->
+    <div class="instagram-feed">
+      <iframe class="instagram-embed" src="https://www.instagram.com/p/C7fcbCSyx44/embed" allowtransparency="true"></iframe>
+    </div>
+
+    <p style="margin-top: 1rem;">
+      <a href="https://www.instagram.com/tigasbarber__" target="_blank" class="btn">Ver mais no Instagram</a>
+    </p>
   </section>
 
   <footer>
