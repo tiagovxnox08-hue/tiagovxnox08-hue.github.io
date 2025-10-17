@@ -7,8 +7,8 @@
   <style>
     :root {
       --cor-principal: #e4b1c1;
-      --cor-secundaria: black;
-      --cor-texto: #333;
+      --cor-fundo: #fff;
+      --cor-texto: #000;
       --cor-destaque: red;
       --fonte-principal: 'Minion', sans-serif;
     }
@@ -21,7 +21,7 @@
     }
 
     body {
-      background-color: var(--cor-secundaria);
+      background-color: var(--cor-fundo);
       color: var(--cor-texto);
       line-height: 1.6;
     }
@@ -30,14 +30,16 @@
       background-color: var(--cor-principal);
       padding: 1.5rem;
       text-align: center;
-      color: #fff;
+      color: var(--cor-texto);
+      font-weight: bold;
+      text-transform: uppercase;
     }
 
     nav {
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
-      background-color: #fff;
+      background-color: var(--cor-fundo);
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
 
@@ -62,18 +64,17 @@
       background: url('https://images.unsplash.com/photo-1600334129128-1a1b9c6f6d44?auto=format&fit=crop&w=1200&q=60') center/cover no-repeat;
       color: #fff;
       padding: 6rem 1.5rem;
+      text-shadow: 1px 1px 3px #000;
     }
 
     .hero h1 {
       font-size: 2.5rem;
       margin-bottom: 1rem;
-      text-shadow: 1px 1px 3px #000;
     }
 
     .hero p {
       font-size: 1.2rem;
       margin-bottom: 2rem;
-      text-shadow: 1px 1px 2px #000;
     }
 
     .btn {
@@ -88,7 +89,7 @@
     }
 
     .btn:hover {
-      background-color: #944d64;
+      background-color: #b00;
     }
 
     .servicos {
@@ -109,21 +110,47 @@
       margin-bottom: 0.5rem;
     }
 
-    .galeria {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1rem;
-    }
-
-    .galeria img {
-      width: 100%;
+    /* 🎞️ Carrossel */
+    .carrossel-container {
+      position: relative;
+      max-width: 900px;
+      margin: 2rem auto;
+      overflow: hidden;
       border-radius: 10px;
-      transition: transform 0.3s;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
     }
 
-    .galeria img:hover {
-      transform: scale(1.05);
+    .carrossel {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
     }
+
+    .carrossel img {
+      width: 100%;
+      flex-shrink: 0;
+      border-radius: 10px;
+    }
+
+    .carrossel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0, 0, 0, 0.5);
+      color: #fff;
+      border: none;
+      font-size: 2rem;
+      cursor: pointer;
+      padding: 0.5rem 1rem;
+      border-radius: 50%;
+      transition: background 0.3s;
+    }
+
+    .carrossel-btn:hover {
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+
+    .carrossel-btn.prev { left: 10px; }
+    .carrossel-btn.next { right: 10px; }
 
     .contato {
       background-color: #f8f8f8;
@@ -133,7 +160,6 @@
       text-align: left;
     }
 
-    /* Seção Instagram */
     #instagram {
       background-color: #fff;
       padding: 3rem 1.5rem;
@@ -143,11 +169,6 @@
     #instagram h2 {
       color: var(--cor-destaque);
       margin-bottom: 0.5rem;
-    }
-
-    #instagram p {
-      margin-bottom: 1rem;
-      font-size: 1rem;
     }
 
     .qrcode {
@@ -162,29 +183,15 @@
       transform: scale(1.05);
     }
 
-    /* Widget Instagram */
-    .instagram-feed {
-      margin-top: 2rem;
-      display: flex;
-      justify-content: center;
-    }
-
-    iframe.instagram-embed {
-      width: 100%;
-      max-width: 500px;
-      border: none;
-      overflow: hidden;
-    }
-
     footer {
       background-color: var(--cor-principal);
-      color: #fff;
+      color: var(--cor-texto);
       text-align: center;
       padding: 1rem;
       margin-top: 2rem;
+      font-weight: bold;
     }
 
-    /* Botão WhatsApp fixo */
     .whatsapp-float {
       position: fixed;
       width: 60px;
@@ -255,13 +262,18 @@
     </div>
   </section>
 
+  <!-- 🎞️ Carrossel de fotos -->
   <section id="galeria">
     <h2>Galeria de Trabalhos</h2>
-    <div class="galeria">
-      <img src="https://images.unsplash.com/photo-1599351430140-bb92df6a1d78?auto=format&fit=crop&w=600&q=60" alt="Cabelo">
-      <img src="https://images.unsplash.com/photo-1606220945770-6c70a5da75f3?auto=format&fit=crop&w=600&q=60" alt="Barba">
-      <img src="https://images.unsplash.com/photo-1600334129128-1a1b9c6f6d44?auto=format&fit=crop&w=600&q=60" alt="Penteado">
-      <img src="https://images.unsplash.com/photo-1596464716127-f2a82984de30?auto=format&fit=crop&w=600&q=60" alt="Corte">
+    <div class="carrossel-container">
+      <div class="carrossel" id="carrossel">
+        <img src="https://images.unsplash.com/photo-1599351430140-bb92df6a1d78?auto=format&fit=crop&w=900&q=60" alt="Cabelo">
+        <img src="https://images.unsplash.com/photo-1606220945770-6c70a5da75f3?auto=format&fit=crop&w=900&q=60" alt="Barba">
+        <img src="https://images.unsplash.com/photo-1600334129128-1a1b9c6f6d44?auto=format&fit=crop&w=900&q=60" alt="Penteado">
+        <img src="https://images.unsplash.com/photo-1596464716127-f2a82984de30?auto=format&fit=crop&w=900&q=60" alt="Corte">
+      </div>
+      <button class="carrossel-btn prev" onclick="mudarSlide(-1)">&#10094;</button>
+      <button class="carrossel-btn next" onclick="mudarSlide(1)">&#10095;</button>
     </div>
   </section>
 
@@ -278,25 +290,15 @@
   <section id="localizacao">
     <h2>Onde Estamos</h2>
     <p>Rua Lauro Corona, 60 - Alvorada, Piracicaba - SP</p>
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3679.183939729807!2d-47.61133178814232!3d-22.758554079273583!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94c63003d28cb657%3A0x8209b0b87f26a046!2sR.%20Lauro%20Corona%2C%2060%20-%20Jardim%20Alvorada%2C%20Piracicaba%20-%20SP%2C%2013425-723!5e0!3m2!1spt-BR!2sbr!4v1760618157267!5m2!1spt-BR!2sbr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3679.183939729807!2d-47.61133178814232!3d-22.758554079273583!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94c63003d28cb657%3A0x8209b0b87f26a046!2sR.%20Lauro%20Corona%2C%2060%20-%20Jardim%20Alvorada%2C%20Piracicaba%20-%20SP%2C%2013425-723!5e0!3m2!1spt-BR!2sbr!4v1760618157267!5m2!1spt-BR!2sbr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
   </section>
 
-  <!-- 🌟 SEÇÃO INSTAGRAM COM QR CODE E FEED -->
   <section id="instagram">
     <h2>Siga-nos no Instagram 📸</h2>
     <p>Escaneie o QR Code abaixo ou clique para visitar o perfil:</p>
     <a href="https://www.instagram.com/tigasbarber__" target="_blank">
       <img src="IMG_5064.jpeg" alt="QR Code do Instagram Tigas Barber" class="qrcode">
     </a>
-
-    <!-- 🖼️ Feed Automático -->
-    <div class="instagram-feed">
-      <iframe class="instagram-embed" src="https://www.instagram.com/p/C7fcbCSyx44/embed" allowtransparency="true"></iframe>
-    </div>
-
-    <p style="margin-top: 1rem;">
-      <a href="https://www.instagram.com/tigasbarber__" target="_blank" class="btn">Ver mais no Instagram</a>
-    </p>
   </section>
 
   <footer>
@@ -304,5 +306,21 @@
   </footer>
 
   <a href="https://wa.me/5519981369475" class="whatsapp-float" target="_blank">💬</a>
+
+  <script>
+    let slideIndex = 0;
+    const carrossel = document.getElementById('carrossel');
+    const totalSlides = carrossel.children.length;
+
+    function mudarSlide(direcao) {
+      slideIndex += direcao;
+      if (slideIndex < 0) slideIndex = totalSlides - 1;
+      if (slideIndex >= totalSlides) slideIndex = 0;
+      carrossel.style.transform = `translateX(-${slideIndex * 100}%)`;
+    }
+
+    // Auto-slide a cada 4 segundos
+    setInterval(() => mudarSlide(1), 4000);
+  </script>
 </body>
 </html>
