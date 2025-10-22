@@ -123,12 +123,17 @@
     .carrossel {
       display: flex;
       transition: transform 0.5s ease-in-out;
+      align-items: center;
+      justify-content: center;
     }
 
     .carrossel img {
-      width: 100%;
-      flex-shrink: 0;
+      width: 12rem;
+      height: 12rem;
+      object-fit: cover;
+      margin: 0 auto;
       border-radius: 10px;
+      flex-shrink: 0;
     }
 
     .carrossel-btn {
@@ -172,6 +177,8 @@
     }
 
     .qrcode {
+      display: block;
+      margin: 1rem auto;
       width: 180px;
       height: 180px;
       border-radius: 10px;
@@ -216,6 +223,7 @@
 
     @media (max-width: 600px) {
       .hero h1 { font-size: 2rem; }
+      .carrossel img { width: 10rem; height: 10rem; }
     }
   </style>
 </head>
@@ -267,11 +275,10 @@
     <h2>Galeria de Trabalhos</h2>
     <div class="carrossel-container">
       <div class="carrossel" id="carrossel">
-        <img src="IMG_5126.jpeg="Cabelo">
-        <img src="E72D39D4-89F8-4C3C-822D-2E95744702DA.jpeg="Barba">
-        <img src="
-IMG_2823.jpeg="Penteado">
-        <img src="IMG_1994.jpeg="Corte">
+        <img src="IMG_5126.jpeg" alt="Cabelo">
+        <img src="E72D39D4-89F8-4C3C-822D-2E95744702DA.jpeg" alt="Barba">
+        <img src="IMG_2823.jpeg" alt="Penteado">
+        <img src="IMG_1994.jpeg" alt="Corte">
       </div>
       <button class="carrossel-btn prev" onclick="mudarSlide(-1)">&#10094;</button>
       <button class="carrossel-btn next" onclick="mudarSlide(1)">&#10095;</button>
@@ -291,7 +298,8 @@ IMG_2823.jpeg="Penteado">
   <section id="localizacao">
     <h2>Onde Estamos</h2>
     <p>Rua Lauro Corona, 60 - Alvorada, Piracicaba - SP</p>
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3679.183939729807!2d-47.61133178814232!3d-22.758554079273583!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94c63003d28cb657%3A0x8209b0b87f26a046!2sR.%20Lauro%20Corona%2C%2060%20-%20Jardim%20Alvorada%2C%20Piracicaba%20-%20SP%2C%2013425-723!5e0!3m2!1spt-BR!2sbr!4v1760618157267!5m2!1spt-BR!2sbr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3679.183939729807!2d-47.61133178814232!3d-22.758554079273583!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94c63003d28cb657%3A0x8209b0b87f26a046!2sR.%20Lauro%20Corona%2C%2060%20-%20Jardim%20Alvorada%2C%20Piracicaba%20-%20SP%2C%2013425-723!5e0!3m2!1spt-BR!2sbr!4v1760618157267!5m2!1spt-BR!2sbr" 
+      width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
   </section>
 
   <section id="instagram">
