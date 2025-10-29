@@ -1,335 +1,779 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tigas Barber | Salão de Beleza</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Tigas Barber — Piracicaba</title>
+
+  <!-- Basic SEO -->
+  <meta name="description" content="Tigas Barber — Corte, Barba, Coloração e Design de Sobrancelhas em Piracicaba. Agende e confira avaliações dos clientes." />
+
   <style>
-    :root {
-      --cor-principal: #e4b1c1;
-      --cor-fundo: #fff;
-      --cor-texto: #000;
-      --cor-destaque: red;
-      --fonte-principal: 'Minion', sans-serif;
+    /* -------------------------
+       Design tokens / variables
+       ------------------------- */
+    :root{
+      --primary:#e4b1c1; /* rose */
+      --accent:#c43b4b;  /* slightly stronger red for accents */
+      --muted:#6b6b6b;
+      --bg:#ffffff;
+      --card-bg: #fff;
+      --glass: rgba(255,255,255,0.7);
+      --shadow: 0 8px 24px rgba(18,18,18,0.08);
+      --radius: 14px;
+      --sans: "Inter", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --max-width: 1100px;
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: var(--fonte-principal);
+    /* -------------------------
+       Base reset & typography
+       ------------------------- */
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:var(--sans);
+      background:linear-gradient(180deg, #fff 0%, #fbfbfb 100%);
+      color:#111;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+      padding:24px 18px;
+    }
+    .container{
+      max-width:var(--max-width);
+      margin:0 auto;
+    }
+    h1,h2,h3{margin:0 0 8px 0}
+    h1{font-size:1.8rem;letter-spacing:0.2px}
+    h2{font-size:1.15rem}
+    p{margin:0 0 12px 0;color:var(--muted)}
+
+    /* -------------------------
+       Header
+       ------------------------- */
+    header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom:18px;
+    }
+    .brand{
+      display:flex;
+      gap:12px;
+      align-items:center;
+    }
+    .logo{
+      width:60px;
+      height:60px;
+      border-radius:12px;
+      background:linear-gradient(135deg,var(--primary),#f5c4cf);
+      box-shadow: var(--shadow);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:700;
+      color:#fff;
+      font-size:18px;
+    }
+    nav{
+      display:flex;
+      gap:12px;
+      align-items:center;
+    }
+    .chip{
+      font-size:0.9rem;
+      color:var(--muted);
+      background:transparent;
+      padding:6px 10px;
+      border-radius:10px;
+      border:1px solid rgba(0,0,0,0.06);
+    }
+    .btn{
+      appearance:none;
+      border:0;
+      padding:10px 14px;
+      border-radius:10px;
+      background:var(--primary);
+      color:#fff;
+      cursor:pointer;
+      font-weight:600;
+      box-shadow: 0 6px 18px rgba(228,177,193,0.18);
     }
 
-    body {
-      background-color: var(--cor-fundo);
-      color: var(--cor-texto);
-      line-height: 1.6;
+    /* -------------------------
+       Hero / Carousel
+       ------------------------- */
+    .hero{
+      width:100%;
+      border-radius: var(--radius);
+      overflow:hidden;
+      position:relative;
+      box-shadow: var(--shadow);
+      min-height:320px;
+      display:grid;
+      grid-template-columns: 1fr;
+      margin-bottom:20px;
     }
-
-    header {
-      background-color: var(--cor-principal);
-      padding: 1.5rem;
-      text-align: center;
-      color: var(--cor-texto);
-      font-weight: bold;
-      text-transform: uppercase;
+    .carousel{
+      position:relative;
+      width:100%;
+      height:100%;
     }
-
-    nav {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      background-color: var(--cor-fundo);
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    .carousel-slide{
+      position:absolute;
+      inset:0;
+      background-size:cover;
+      background-position:center;
+      transition:opacity .8s ease, transform .8s ease;
+      opacity:0;
+      transform:scale(1.02);
+      will-change:opacity,transform;
     }
-
-    nav a {
-      color: var(--cor-texto);
-      text-decoration: none;
-      padding: 1rem;
-      font-weight: 600;
-      transition: color 0.3s;
+    .carousel-slide.active{
+      opacity:1;
+      transform:scale(1);
+      z-index:1;
     }
-
-    nav a:hover {
-      color: var(--cor-destaque);
+    /* overlay content */
+    .hero-content{
+      position:absolute;
+      left:18px;
+      bottom:18px;
+      background: linear-gradient(180deg, rgba(0,0,0,0.18), rgba(0,0,0,0.28));
+      color:#fff;
+      padding:16px;
+      border-radius:12px;
+      backdrop-filter: blur(6px);
+      max-width:48%;
     }
-
-    section {
-      padding: 3rem 1.5rem;
-      text-align: center;
+    .hero-content small{opacity:0.95}
+    .hero-controls{
+      position:absolute;
+      right:12px;
+      top:12px;
+      display:flex;
+      gap:8px;
     }
-
-    .hero {
-      background: url('https://images.unsplash.com/photo-1600334129128-1a1b9c6f6d44?auto=format&fit=crop&w=1200&q=60') center/cover no-repeat;
-      color: #fff;
-      padding: 6rem 1.5rem;
-      text-shadow: 1px 1px 3px #000;
+    .dot{
+      width:10px;height:10px;border-radius:50%;
+      background:rgba(255,255,255,0.5);
+      border:2px solid rgba(255,255,255,0.12);
+      cursor:pointer;
     }
+    .dot.active{background:#fff}
 
-    .hero h1 {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
+    /* -------------------------
+       Main layout
+       ------------------------- */
+    main{
+      display:grid;
+      grid-template-columns: 1fr 360px;
+      gap:20px;
+      align-items:start;
     }
-
-    .hero p {
-      font-size: 1.2rem;
-      margin-bottom: 2rem;
+    @media (max-width:980px){
+      main{grid-template-columns: 1fr}
+      .hero-content{max-width:70%}
     }
-
-    .btn {
-      background-color: var(--cor-destaque);
-      color: #fff;
-      padding: 0.8rem 1.5rem;
-      border: none;
-      border-radius: 25px;
-      cursor: pointer;
-      text-decoration: none;
-      transition: background 0.3s;
+    /* -------------------------
+       Card components
+       ------------------------- */
+    .card{
+      background:var(--card-bg);
+      border-radius:12px;
+      padding:16px;
+      box-shadow: var(--shadow);
     }
-
-    .btn:hover {
-      background-color: #b00;
+    .services-list{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
     }
-
-    .servicos {
-      display: grid;
-      gap: 1.5rem;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    .service{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:10px;
+      border-radius:10px;
+      border:1px solid rgba(0,0,0,0.04);
     }
+    .price{font-weight:700;color:#111}
 
-    .servico {
-      background-color: #fff;
-      padding: 1.5rem;
-      border-radius: 10px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    /* -------------------------
+       Review area
+       ------------------------- */
+    .review-header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      margin-bottom:12px;
     }
-
-    .servico h3 {
-      color: var(--cor-destaque);
-      margin-bottom: 0.5rem;
+    .avg{
+      display:flex;
+      align-items:center;
+      gap:12px;
     }
-
-    /* 🎞️ Carrossel */
-    .carrossel-container {
-      position: relative;
-      max-width: 900px;
-      margin: 2rem auto;
-      overflow: hidden;
-      border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    .avg .score{
+      font-size:1.6rem;
+      font-weight:700;
+      color: #111;
     }
-
-    .carrossel {
-      display: flex;
-      transition: transform 0.5s ease-in-out;
-      align-items: center;
-      justify-content: center;
+    .stars-inline{display:flex;gap:6px;align-items:center}
+    .star{width:18px;height:18px}
+    .reviews-list{display:flex;flex-direction:column;gap:12px;margin-top:12px}
+    .review-item{
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      padding:12px;
+      border-radius:10px;
+      border:1px solid rgba(0,0,0,0.04);
+      background:linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.95));
     }
-
-    .carrossel img {
-      width: 12rem;
-      height: 12rem;
-      object-fit: cover;
-      margin: 0 auto;
-      border-radius: 10px;
-      flex-shrink: 0;
+    .review-avatar{
+      width:46px;height:46px;border-radius:10px;
+      background:linear-gradient(135deg,var(--primary),#f6c8d4);
+      color:#fff;
+      display:flex;align-items:center;justify-content:center;font-weight:700;
+      flex:0 0 46px;
     }
+    .review-body{flex:1}
+    .review-meta{font-size:0.85rem;color:var(--muted);margin-bottom:6px}
+    .review-text{white-space:pre-wrap}
 
-    .carrossel-btn {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background-color: rgba(0, 0, 0, 0.5);
-      color: #fff;
-      border: none;
-      font-size: 2rem;
-      cursor: pointer;
-      padding: 0.5rem 1rem;
-      border-radius: 50%;
-      transition: background 0.3s;
+    /* -------------------------
+       Sidebar / contact
+       ------------------------- */
+    .contact{
+      display:flex;flex-direction:column;gap:10px;
     }
-
-    .carrossel-btn:hover {
-      background-color: rgba(0, 0, 0, 0.8);
+    .contact-row{
+      display:flex;gap:10px;align-items:center;
     }
+    .contact .phone{font-weight:700}
+    .hours{font-size:0.95rem;color:var(--muted)}
 
-    .carrossel-btn.prev { left: 10px; }
-    .carrossel-btn.next { right: 10px; }
-
-    .contato {
-      background-color: #f8f8f8;
-      padding: 2rem;
-      border-radius: 10px;
-      display: inline-block;
-      text-align: left;
+    /* -------------------------
+       Modal
+       ------------------------- */
+    .modal-backdrop{
+      position:fixed;inset:0;background:rgba(0,0,0,0.45);display:none;
+      align-items:center;justify-content:center;padding:18px;z-index:60;
     }
-
-    #instagram {
-      background-color: #fff;
-      padding: 3rem 1.5rem;
-      text-align: center;
+    .modal{
+      background:var(--card-bg);border-radius:12px;padding:18px;width:100%;max-width:620px;box-shadow:0 20px 50px rgba(0,0,0,0.3);
     }
-
-    #instagram h2 {
-      color: var(--cor-destaque);
-      margin-bottom: 0.5rem;
+    .modal.active{display:block}
+    .modal .row{display:flex;gap:8px;margin-bottom:12px}
+    .input, textarea{
+      width:100%;padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.06);font-size:1rem;
     }
+    textarea{min-height:100px;resize:vertical}
+    .modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:10px}
 
-    .qrcode {
-      display: block;
-      margin: 1rem auto;
-      width: 180px;
-      height: 180px;
-      border-radius: 10px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-      transition: transform 0.3s;
-    }
-
-    .qrcode:hover {
-      transform: scale(1.05);
-    }
-
-    footer {
-      background-color: var(--cor-principal);
-      color: var(--cor-texto);
-      text-align: center;
-      padding: 1rem;
-      margin-top: 2rem;
-      font-weight: bold;
-    }
-
-    .whatsapp-float {
-      position: fixed;
-      width: 60px;
-      height: 60px;
-      bottom: 20px;
-      right: 20px;
-      background-color: #25D366;
-      color: #fff;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2rem;
-      box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
-      text-decoration: none;
-      transition: transform 0.3s;
-    }
-
-    .whatsapp-float:hover {
-      transform: scale(1.1);
-    }
-
-    @media (max-width: 600px) {
-      .hero h1 { font-size: 2rem; }
-      .carrossel img { width: 10rem; height: 10rem; }
-    }
+    /* -------------------------
+       Tiny helpers
+       ------------------------- */
+    .muted{color:var(--muted)}
+    .small{font-size:0.9rem}
+    .tiny{font-size:0.8rem;color:var(--muted)}
+    .center{text-align:center}
+    footer{margin-top:26px;color:var(--muted);font-size:0.9rem;text-align:center}
   </style>
 </head>
 <body>
-  <header>
-    <h1>Tigas Barber</h1>
-    <p>Transformando seu estilo todos os dias ✂️✨</p>
-  </header>
-
-  <nav>
-    <a href="#inicio">Início</a>
-    <a href="#servicos">Serviços</a>
-    <a href="#galeria">Galeria</a>
-    <a href="#contato">Contato</a>
-    <a href="#localizacao">Localização</a>
-    <a href="#instagram">Instagram</a>
-  </nav>
-
-  <section id="inicio" class="hero">
-    <h1>Realce seu visual com um toque profissional</h1>
-    <p>Agende seu horário e viva uma nova experiência de cuidado e estilo.</p>
-    <a href="#contato" class="btn">Agendar agora</a>
-  </section>
-
-  <section id="servicos">
-    <h2>Nossos Serviços & Preços</h2>
-    <div class="servicos">
-      <div class="servico">
-        <h3>Corte Masculino</h3>
-        <p>A partir de R$ 30</p>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="logo" aria-hidden="true">TG</div>
+        <div>
+          <h1>Tigas Barber</h1>
+          <div class="tiny muted">Rua Lauro Corona, 60 - Alvorada, Piracicaba - SP</div>
+        </div>
       </div>
-      <div class="servico">
-        <h3>Coloração</h3>
-        <p>A partir de R$ 120</p>
+      <nav>
+        <div class="chip small">Aberto: Seg-Sáb 17:00–22:00</div>
+        <button class="btn" id="btn-open-review">Deixe sua avaliação</button>
+      </nav>
+    </header>
+
+    <!-- HERO / CAROUSEL -->
+    <section class="hero card" aria-label="Galeria de fotos">
+      <div class="carousel" id="carousel">
+        <!-- slides will be injected by JS to use the images as backgrounds -->
+        <div class="hero-content" aria-hidden="false">
+          <small>Profissional • Atendimento Personalizado</small>
+          <h2>Beleza, precisão e cuidado em cada corte</h2>
+          <p class="tiny">Corte Masculino, Barba, Coloração e Design de Sobrancelhas em ambiente acolhedor.</p>
+        </div>
+        <div class="hero-controls" id="hero-controls" aria-hidden="true"></div>
       </div>
-      <div class="servico">
-        <h3>Barba Completa</h3>
-        <p>A partir de R$ 20</p>
+    </section>
+
+    <!-- main area -->
+    <main>
+      <!-- left column -->
+      <section>
+        <div class="card">
+          <h2>Serviços</h2>
+          <p class="muted small">Preços a partir de</p>
+          <div class="services-list" aria-live="polite">
+            <div class="service"><div>Corte Masculino</div><div class="price">R$ 30+</div></div>
+            <div class="service"><div>Coloração</div><div class="price">R$ 120+</div></div>
+            <div class="service"><div>Barba Completa</div><div class="price">R$ 20+</div></div>
+            <div class="service"><div>Design de Sobrancelhas</div><div class="price">R$ 15+</div></div>
+          </div>
+        </div>
+
+        <div style="height:14px"></div>
+
+        <div class="card" id="reviewsCard" aria-live="polite">
+          <div class="review-header">
+            <div class="avg">
+              <div class="score" id="avgScore">0.0</div>
+              <div class="stars-inline" id="avgStars" aria-hidden="true"></div>
+            </div>
+            <div class="center tiny muted">
+              <div id="totalReviews">0 avaliações</div>
+            </div>
+          </div>
+
+          <div>
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+              <strong>Avaliações dos clientes</strong>
+              <span class="tiny muted">— veja o que dizem</span>
+            </div>
+
+            <div id="reviewsList" class="reviews-list">
+              <!-- reviews inserted here -->
+            </div>
+
+            <div style="margin-top:12px" class="tiny muted">Todas as avaliações são armazenadas localmente em seu navegador para demonstração.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- right column / sidebar -->
+      <aside>
+        <div class="card contact">
+          <h2>Contato & Local</h2>
+          <div class="contact-row">
+            <div style="flex:1">
+              <div class="tiny muted">Telefone</div>
+              <div class="phone"> (19) 98136-9475</div>
+            </div>
+          </div>
+
+          <div class="contact-row">
+            <div style="flex:1">
+              <div class="tiny muted">Email</div>
+              <div class="small">tiagovxnox@gmail.com</div>
+            </div>
+          </div>
+
+          <div class="contact-row">
+            <div style="flex:1">
+              <div class="tiny muted">Endereço</div>
+              <div class="small">Rua Lauro Corona, 60 - Alvorada, Piracicaba - SP</div>
+            </div>
+          </div>
+
+          <div style="height:8px"></div>
+
+          <div>
+            <div class="tiny muted">Horário de atendimento</div>
+            <div class="hours">Segunda — Sábado, 17:00 — 22:00</div>
+          </div>
+
+          <div style="height:8px"></div>
+
+          <div style="display:flex;gap:8px;align-items:center">
+            <a class="btn" style="text-decoration:none;display:inline-flex;align-items:center;gap:8px" href="https://wa.me/5519981369475" target="_blank" rel="noopener">Agendar via WhatsApp</a>
+            <a class="chip tiny" href="#reviewsCard">Avaliações</a>
+          </div>
+        </div>
+
+        <div style="height:12px"></div>
+
+        <div class="card">
+          <h2>Redes sociais</h2>
+          <p class="tiny muted">Siga-nos para ver trabalhos recentes</p>
+          <div style="display:flex;gap:8px;margin-top:8px">
+            <a class="chip" href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram</a>
+            <a class="chip" href="#" target="_blank" rel="noopener">Facebook</a>
+          </div>
+        </div>
+      </aside>
+    </main>
+
+    <footer>
+      <div class="tiny muted">© Tigas Barber — Piracicaba. Projeto de presença online.</div>
+    </footer>
+  </div>
+
+  <!-- Modal for adding review -->
+  <div id="modalBackdrop" class="modal-backdrop" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <h2 id="modalTitle">Deixe sua avaliação</h2>
+      <p class="tiny muted">Conte como foi seu atendimento — suas palavras ajudam outros clientes.</p>
+
+      <div style="margin-top:12px">
+        <label class="small">Sua nota</label>
+        <div id="starInput" style="display:flex;gap:6px;margin-top:6px" role="radiogroup" aria-label="Classificação por estrelas">
+          <!-- radio-star inputs injected by JS -->
+        </div>
       </div>
-      <div class="servico">
-        <h3>Design de Sobrancelhas</h3>
-        <p>A partir de R$ 15</p>
+
+      <div style="margin-top:12px">
+        <label class="small">Seu nome (opcional)</label>
+        <input id="reviewName" class="input" placeholder="Ex: João" maxlength="40" />
+      </div>
+
+      <div style="margin-top:12px">
+        <label class="small">Comentário</label>
+        <textarea id="reviewText" class="input" placeholder="Conte sobre sua experiência..." maxlength="800"></textarea>
+      </div>
+
+      <div class="modal-actions">
+        <button id="btnCancel" class="chip">Cancelar</button>
+        <button id="btnSubmitReview" class="btn">Enviar avaliação</button>
       </div>
     </div>
-  </section>
-
-  <!-- 🎞️ Carrossel de fotos -->
-  <section id="galeria">
-    <h2>Galeria de Trabalhos</h2>
-    <div class="carrossel-container">
-      <div class="carrossel" id="carrossel">
-        <img src="img/IMG_5126.jpeg" alt="Cabelo">
-        <img src="img/E72D39D4-89F8-4C3C-822D-2E95744702DA.jpeg" alt="Barba">
-        <img src="img/IMG_2823.jpeg" alt="Penteado">
-        <img src="img/IMG_1994.jpeg" alt="Corte">
-      </div>
-      <button class="carrossel-btn prev" onclick="mudarSlide(-1)">&#10094;</button>
-      <button class="carrossel-btn next" onclick="mudarSlide(1)">&#10095;</button>
-    </div>
-  </section>
-
-  <section id="contato">
-    <h2>Contato</h2>
-    <div class="contato">
-      <p><strong>Telefone:</strong> (19) 98136-9475</p>
-      <p><strong>E-mail:</strong> tiagovxnox@gmail.com</p>
-      <p><strong>Horário:</strong> Seg a Sáb - 17h às 22h</p>
-      <p><strong>Depoimentos:</strong> ⭐⭐⭐⭐⭐ “Atendimento impecável! Saí me sentindo renovado.”</p>
-    </div>
-  </section>
-
-  <section id="localizacao">
-    <h2>Onde Estamos</h2>
-    <p>Rua Lauro Corona, 60 - Alvorada, Piracicaba - SP</p>
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3679.183939729807!2d-47.61133178814232!3d-22.758554079273583!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94c63003d28cb657%3A0x8209b0b87f26a046!2sR.%20Lauro%20Corona%2C%2060%20-%20Jardim%20Alvorada%2C%20Piracicaba%20-%20SP%2C%2013425-723!5e0!3m2!1spt-BR!2sbr!4v1760618157267!5m2!1spt-BR!2sbr" 
-      width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-  </section>
-
-  <section id="instagram">
-    <h2>Siga-nos no Instagram 📸</h2>
-    <p>Escaneie o QR Code abaixo ou clique para visitar o perfil:</p>
-    <a href="https://www.instagram.com/tigasbarber__" target="_blank">
-      <img src="IMG_5064.jpeg" alt="QR Code do Instagram Tigas Barber" class="qrcode">
-    </a>
-  </section>
-
-  <footer>
-    <p>&copy; 2025 Tiago Rodrigo - Todos os direitos reservados</p>
-  </footer>
-
-  <a href="https://wa.me/5519981369475" class="whatsapp-float" target="_blank">💬</a>
+  </div>
 
   <script>
-    let slideIndex = 0;
-    const carrossel = document.getElementById('carrossel');
-    const totalSlides = carrossel.children.length;
+    /* ============================
+       Utility functions
+       ============================ */
+    function $(sel){return document.querySelector(sel)}
+    function $all(sel){return document.querySelectorAll(sel)}
 
-    function mudarSlide(direcao) {
-      slideIndex += direcao;
-      if (slideIndex < 0) slideIndex = totalSlides - 1;
-      if (slideIndex >= totalSlides) slideIndex = 0;
-      carrossel.style.transform = `translateX(-${slideIndex * 100}%)`;
+    function escapeHtml(str){
+      return str.replace(/[&<>"']/g, function(m){
+        return ({
+          '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+        })[m];
+      });
     }
 
-    // Auto-slide a cada 4 segundos
-    setInterval(() => mudarSlide(1), 4000);
+    function formatDateISOToPtBR(iso){
+      const d = new Date(iso);
+      try {
+        return d.toLocaleString('pt-BR', {day:'2-digit', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit'});
+      } catch(e){
+        return d.toLocaleString();
+      }
+    }
+
+    function avg(arr){ if(!arr.length) return 0; return arr.reduce((s,x)=>s+x,0)/arr.length; }
+
+    /* ============================
+       Carousel: use user images as background
+       ============================ */
+    (function initCarousel(){
+      const images = [
+        'IMG_5126.jpeg',
+        'E72D39D4-89F8-4C3C-822D-2E95744702DA.jpeg',
+        'IMG_2823.jpeg',
+        'IMG_1994.jpeg'
+      ];
+
+      const carousel = $('#carousel');
+      const controls = $('#hero-controls');
+      let slides = [];
+      let dots = [];
+      let idx = 0;
+
+      images.forEach((img,i) => {
+        // create slide
+        const s = document.createElement('div');
+        s.className = 'carousel-slide';
+        s.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.12), rgba(0,0,0,0.12)), url("${img}")`;
+        if(i === 0) s.classList.add('active');
+        carousel.appendChild(s);
+        slides.push(s);
+
+        // dot
+        const dot = document.createElement('div');
+        dot.className = 'dot' + (i===0? ' active':'');
+        dot.title = 'Imagem ' + (i+1);
+        dot.addEventListener('click', ()=> setIndex(i));
+        controls.appendChild(dot);
+        dots.push(dot);
+      });
+
+      function setIndex(i){
+        slides[idx].classList.remove('active');
+        dots[idx].classList.remove('active');
+        idx = i;
+        slides[idx].classList.add('active');
+        dots[idx].classList.add('active');
+      }
+
+      // automatic rotate
+      let timer = setInterval(()=> {
+        setIndex((idx+1) % slides.length);
+      }, 4500);
+
+      // pause on hover
+      carousel.addEventListener('mouseenter', ()=> clearInterval(timer));
+      carousel.addEventListener('mouseleave', ()=> timer = setInterval(()=> setIndex((idx+1) % slides.length), 4500));
+    })();
+
+    /* ============================
+       Reviews system (localStorage)
+       ============================ */
+    (function initReviews(){
+      const STORAGE_KEY = 'tigasbarber_reviews_v1';
+      const sample = [
+        {
+          id: 'seed1',
+          name: 'Marcos',
+          rating: 5,
+          text: 'Atendimento excelente, corte perfeito. Recomendo!',
+          createdAt: new Date().toISOString()
+        },
+        {
+          id: 'seed2',
+          name: 'Ana',
+          rating: 4,
+          text: 'Ambiente agradável e profissionais competentes.',
+          createdAt: new Date(Date.now()-1000*60*60*24*3).toISOString()
+        }
+      ];
+
+      // get stored or seed
+      function load(){
+        try{
+          const raw = localStorage.getItem(STORAGE_KEY);
+          if(!raw){
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(sample));
+            return sample.slice();
+          }
+          const parsed = JSON.parse(raw);
+          if(!Array.isArray(parsed)) throw new Error('invalid');
+          return parsed;
+        } catch(e){
+          // fallback: reset to sample
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(sample));
+          return sample.slice();
+        }
+      }
+
+      function save(arr){
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(arr));
+      }
+
+      let reviews = load();
+
+      // DOM refs
+      const avgScoreEl = $('#avgScore');
+      const avgStarsEl = $('#avgStars');
+      const totalReviewsEl = $('#totalReviews');
+      const reviewsListEl = $('#reviewsList');
+
+      // render stars inline for average
+      function renderAvg(){
+        const ratings = reviews.map(r => Number(r.rating) || 0);
+        const average = avg(ratings);
+        avgScoreEl.textContent = (Math.round(average*10)/10).toFixed(1);
+        avgStarsEl.innerHTML = renderStarsInline(average);
+        totalReviewsEl.textContent = `${reviews.length} ${reviews.length === 1 ? 'avaliação' : 'avaliações'}`;
+      }
+
+      function renderStarsInline(score){
+        // full star for integer, half star when .5 etc - here show up to 5 stars
+        const out = [];
+        for(let i=1;i<=5;i++){
+          const cls = (i <= Math.round(score)) ? 'filled' : 'empty';
+          out.push(svgStar(i<=score));
+        }
+        return out.join('');
+      }
+
+      function svgStar(filled){
+        if(filled){
+          return `<svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path fill="#F3C623" d="M12 .587l3.668 7.431L23.6 9.75l-5.6 5.456 1.322 7.707L12 18.896 4.678 22.91 6 15.202 0.4 9.746l7.932-1.732z"/></svg>`;
+        } else {
+          return `<svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path fill="#E0E0E0" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>`;
+        }
+      }
+
+      function renderList(){
+        reviewsListEl.innerHTML = '';
+        if(!reviews.length){
+          reviewsListEl.innerHTML = '<div class="tiny muted">Seja o primeiro a avaliar.</div>';
+          return;
+        }
+
+        // sort by recency
+        const sorted = reviews.slice().sort((a,b)=> new Date(b.createdAt) - new Date(a.createdAt));
+        sorted.forEach(r=>{
+          const div = document.createElement('div');
+          div.className = 'review-item';
+
+          const avatar = document.createElement('div');
+          avatar.className = 'review-avatar';
+          avatar.textContent = (r.name && r.name.trim().length) ? (r.name.trim().charAt(0).toUpperCase()) : 'C';
+
+          const body = document.createElement('div');
+          body.className = 'review-body';
+
+          const meta = document.createElement('div');
+          meta.className = 'review-meta';
+          meta.innerHTML = `<strong>${escapeHtml(r.name || 'Cliente')}</strong> • ${renderStarsInline(r.rating)} • <span class="tiny muted">${escapeHtml(formatDateISOToPtBR(r.createdAt))}</span>`;
+
+          const text = document.createElement('div');
+          text.className = 'review-text';
+          text.innerHTML = r.text ? escapeHtml(r.text) : '<span class="muted tiny">Sem comentário</span>';
+
+          body.appendChild(meta);
+          body.appendChild(text);
+
+          div.appendChild(avatar);
+          div.appendChild(body);
+
+          reviewsListEl.appendChild(div);
+        });
+      }
+
+      // expose addReview
+      function addReview(obj){
+        // basic validation & sanitation
+        const rating = parseInt(obj.rating) || 0;
+        const name = (obj.name || '').trim().slice(0,40);
+        const text = (obj.text || '').trim().slice(0,800);
+
+        if(rating < 1 || rating > 5) return {ok:false, msg:'Nota inválida.'};
+        const newRev = {
+          id: 'r_' + Math.random().toString(36).slice(2,9),
+          rating,
+          name,
+          text,
+          createdAt: new Date().toISOString()
+        };
+        reviews.push(newRev);
+        save(reviews);
+        renderList();
+        renderAvg();
+        return {ok:true, review:newRev};
+      }
+
+      // initial render
+      renderAvg();
+      renderList();
+
+      // Wire modal interactions to add review
+      const btnOpen = $('#btn-open-review');
+      const modal = $('#modalBackdrop');
+      const btnCancel = $('#btnCancel');
+      const btnSubmit = $('#btnSubmitReview');
+      const starInput = $('#starInput');
+      const nameInput = $('#reviewName');
+      const textInput = $('#reviewText');
+
+      // Build star radio controls
+      function buildStarInput(){
+        starInput.innerHTML = '';
+        for(let i=5;i>=1;i--){
+          const label = document.createElement('label');
+          label.style.cursor='pointer';
+          label.style.display='inline-flex';
+          label.style.alignItems='center';
+          label.style.gap='6px';
+          label.innerHTML = `
+            <input type="radio" name="rating" value="${i}" aria-label="${i} estrelas" style="display:none">
+            ${starSvgInline(i)}
+          `;
+          label.addEventListener('click', ()=> {
+            // highlight selected
+            const inputs = starInput.querySelectorAll('input');
+            inputs.forEach(inp => {
+              const parent = inp.parentElement;
+              if(parseInt(inp.value) <= parseInt(label.querySelector('input').value)) {}
+            });
+          });
+          starInput.appendChild(label);
+        }
+      }
+
+      function starSvgInline(i){
+        return `<svg class="star" viewBox="0 0 24 24" aria-hidden="true" style="width:26px;height:26px"><path fill="#E0E0E0" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg>`;
+      }
+
+      buildStarInput();
+
+      // keyboard accessibility: open modal with Enter from button
+      btnOpen.addEventListener('click', ()=> {
+        modal.style.display = 'flex';
+        modal.setAttribute('aria-hidden','false');
+        document.body.style.overflow = 'hidden';
+      });
+      btnCancel.addEventListener('click', closeModal);
+      modal.addEventListener('click', (e)=>{
+        if(e.target === modal) closeModal();
+      });
+      function closeModal(){
+        modal.style.display = 'none';
+        modal.setAttribute('aria-hidden','true');
+        document.body.style.overflow = '';
+        // reset fields
+        nameInput.value = '';
+        textInput.value = '';
+        const checked = starInput.querySelector('input:checked');
+        if(checked) checked.checked = false;
+      }
+
+      btnSubmit.addEventListener('click', ()=> {
+        const chosen = starInput.querySelector('input:checked');
+        if(!chosen){
+          alert('Por favor, selecione uma nota (1 a 5 estrelas).');
+          return;
+        }
+        const payload = {
+          rating: chosen.value,
+          name: nameInput.value,
+          text: textInput.value
+        };
+        const res = addReview(payload);
+        if(!res.ok){
+          alert(res.msg || 'Erro ao salvar avaliação.');
+          return;
+        }
+        closeModal();
+        // give user feedback
+        // scroll to reviews
+        const rc = document.getElementById('reviewsCard');
+        if(rc) rc.scrollIntoView({behavior:'smooth', block:'start'});
+      });
+
+      // Expose small debug to window
+      window.TigasReviews = {
+        addReview,
+        getAll: ()=> reviews.slice(),
+        clearAll: ()=> { reviews=[]; save(reviews); renderAvg(); renderList(); }
+      };
+
+    })();
+
+    /* ============================
+       Tiny enhancements: keyboard, a11y
+       ============================ */
+    (function(){
+      // close modal on Escape
+      document.addEventListener('keydown', (e)=>{
+        if(e.key === 'Escape'){
+          const m = $('#modalBackdrop');
+          if(m && m.style.display === 'flex') {
+            const cancel = $('#btnCancel');
+            cancel && cancel.click();
+          }
+        }
+      });
+    })();
   </script>
 </body>
 </html>
